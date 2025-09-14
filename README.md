@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
   # Accessible Community Website
 
@@ -9,3 +10,7 @@
 
   Run `npm run dev` to start the development server.
   
+=======
+# wasslleh
+Build with AI 
+>>>>>>> 2615f6975c3384cb977a2359d221ceb9c69711fa
