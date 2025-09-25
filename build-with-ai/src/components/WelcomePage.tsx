@@ -15,52 +15,60 @@ export function WelcomePage({}: WelcomePageProps = {}) {
   const [currentFeature, setCurrentFeature] = useState(0);
   const [disabilityType, setDisabilityType] = useState('none');
 
-  const features = [
-    {
-      icon: Briefcase,
-      title: language === 'ar' ? 'الفرص الوظيفية' : 'Job Opportunities',
-      description: language === 'ar' 
-        ? 'وظائف مخصصة لذوي الاحتياجات الخاصة مع ربط ذكي بـ LinkedIn'
-        : 'Specialized jobs for people with disabilities with smart LinkedIn integration',
-      color: 'from-[var(--color-dark-purple)] to-[var(--color-dark-purple)]'
-    },
-    {
-      icon: Map,
-      title: language === 'ar' ? 'المسارات الآمنة' : 'Safe Paths',
-      description: language === 'ar'
-        ? 'خرائط تفاعلية بتقنية Google Maps لأفضل طرق التنقل الآمن'
-        : 'Interactive maps with Google Maps technology for the best safe navigation routes',
-      color: 'from-[var(--color-calm-green)] to-[var(--color-calm-green)]'
-    },
-    {
-      icon: Users,
-      title: language === 'ar' ? 'المجتمع الداعم' : 'Supportive Community',
-      description: language === 'ar'
-        ? 'منصة تفاعلية لتبادل الخبرات والحصول على الدعم والمساعدة'
-        : 'Interactive platform for sharing experiences and getting support and assistance',
-      color: 'from-[var(--color-vibrant-orange)] to-[var(--color-vibrant-orange)]'
-    },
-    {
-      icon: ShoppingCart,
-      title: language === 'ar' ? 'المتجر والمساهمة' : 'Shop & Contribute',
-      description: language === 'ar'
-        ? 'أدوات مساعدة متخصصة وإمكانية المساهمة في تطوير المجتمع'
-        : 'Specialized assistive tools and the ability to contribute to community development',
-      color: 'from-[var(--color-dark-purple)] to-[var(--color-vibrant-orange)]'
-    },
-    {
-      icon: Volume2,
-      title: language === 'ar' ? 'القراءة الصوتية المتقدمة' : 'Advanced Text-to-Speech',
-      description: language === 'ar'
-        ? 'تقنية نطق متطورة باللهجة الأردنية لتجربة استماع طبيعية'
-        : 'Advanced pronunciation technology in Jordanian dialect for a natural listening experience',
-      color: 'from-[var(--color-calm-green)] to-[var(--color-dark-purple)]'
-    }
-  ];
+ const features = [
+  {
+    icon: Bot,
+    title: language === 'ar' ? 'المساعد الذكي المتطور' : 'Advanced AI Assistant',
+    description: language === 'ar' 
+      ? 'مساعد ذكي متطور بالذكاء الاصطناعي مع محادثة تفاعلية وإرشادات شخصية ومساعدة فورية'
+      : 'Advanced AI assistant with interactive chat, personalized guidance, and instant help',
+    color: 'from-[var(--color-dark-purple)] to-[var(--color-vibrant-orange)]'
+  },
+  {
+    icon: Briefcase,
+    title: language === 'ar' ? 'الفرص الوظيفية' : 'Job Opportunities',
+    description: language === 'ar' 
+      ? 'وظائف مخصصة لذوي الاحتياجات الخاصة مع ربط ذكي بـ LinkedIn'
+      : 'Specialized jobs for people with disabilities with smart LinkedIn integration',
+    color: 'from-[var(--color-dark-purple)] to-[var(--color-dark-purple)]'
+  },
+  {
+    icon: Map,
+    title: language === 'ar' ? 'المسارات الآمنة' : 'Safe Paths',
+    description: language === 'ar'
+      ? 'خرائط تفاعلية بتقنية Google Maps لأفضل طرق التنقل الآمن'
+      : 'Interactive maps with Google Maps technology for the best safe navigation routes',
+    color: 'from-[var(--color-calm-green)] to-[var(--color-calm-green)]'
+  },
+  {
+    icon: Users,
+    title: language === 'ar' ? 'المجتمع الداعم' : 'Supportive Community',
+    description: language === 'ar'
+      ? 'منصة تفاعلية لتبادل الخبرات والحصول على الدعم والمساعدة'
+      : 'Interactive platform for sharing experiences and getting support and assistance',
+    color: 'from-[var(--color-vibrant-orange)] to-[var(--color-vibrant-orange)]'
+  },
+  {
+    icon: ShoppingCart,
+    title: language === 'ar' ? 'المتجر والمساهمة' : 'Shop & Contribute',
+    description: language === 'ar'
+      ? 'أدوات مساعدة متخصصة وإمكانية المساهمة في تطوير المجتمع'
+      : 'Specialized assistive tools and the ability to contribute to community development',
+    color: 'from-[var(--color-dark-purple)] to-[var(--color-vibrant-orange)]'
+  },
+  {
+    icon: Volume2,
+    title: language === 'ar' ? 'القراءة الصوتية المتقدمة' : 'Advanced Text-to-Speech',
+    description: language === 'ar'
+      ? 'تقنية نطق متطورة باللهجة الأردنية لتجربة استماع طبيعية'
+      : 'Advanced pronunciation technology in Jordanian dialect for a natural listening experience',
+    color: 'from-[var(--color-calm-green)] to-[var(--color-dark-purple)]'
+  }
+];
 
   const testimonials = [
     {
-      name: language === 'ar' ? 'سارة أحمد' : 'Sarah Ahmed',
+      name: language === 'ar' ? 'سارة علي' : 'Sarah Ahmed',
       role: language === 'ar' ? 'مهندسة برمجيات' : 'Software Engineer',
       content: language === 'ar'
         ? 'وصلة غيّر حياتي تماماً. وجدت وظيفة أحلامي وتواصلت مع مجتمع رائع يفهم تحدياتي.'
@@ -188,7 +196,7 @@ export function WelcomePage({}: WelcomePageProps = {}) {
           aria-describedby="hero-title"
         >
           {language === 'ar' 
-            ? 'جسرٌ نحوَ مجتمع شامل' 
+            ? 'فرصٌ مُتاحة للجميع' 
             : 'A Bridge Towards an Inclusive Community'}
         </p>
 
@@ -240,110 +248,110 @@ export function WelcomePage({}: WelcomePageProps = {}) {
               aria-describedby="vision-section"
             >
               {language === 'ar' 
-                ? 'نؤمن بأن التنوع قوة، والشمولية حق، والمساواة طريق نحو مجتمع أفضل. في وصلة، نسعى لكسر الحواجز وبناء الجسور نحو عالم يحتضن الجميع بكرامة ومحبة.'
-                : 'We believe that diversity is strength, inclusion is a right, and equality is the path to a better society. At Waslah, we strive to break barriers and build bridges toward a world that embraces everyone with dignity and love.'
+                ? 'نؤمن بأن التنوع قوة، والشمولية حق و طريق نحو مجتمع أفضل. في وصلة، نسعى لكسر الحواجز وبناء الجسور نحو عالم يحتضن الجميع بكرامة ومحبة.'
+                : 'We believe that diversity is strength, inclusion is a right and  the path to a better society. At Waslah, we strive to break barriers and build bridges toward a world that embraces everyone with dignity and love.'
               }
             </p>
           </div>
         </div>
       </section>
 
-      {/* Features Showcase */}
-      <section className="space-y-8" aria-labelledby="features-title">
-        <div className="text-center">
-          <h2 
-            id="features-title"
-            className="text-3xl font-heading font-bold mb-4"
-            tabIndex={0}
-          >
-            {language === 'ar' ? 'ميزاتنا المتطورة' : 'Our Advanced Features'}
-          </h2>
-          <p 
-            className="font-body text-gray-600 dark:text-gray-300 max-w-2xl mx-auto readable-text"
-            role="text"
-            aria-describedby="features-title"
-          >
-            {language === 'ar'
-              ? 'اكتشف كيف يمكن لوصلة أن تحسن من جودة حياتك اليومية'
-              : 'Discover how Waslah can improve your daily quality of life'}
-          </p>
-        </div>
+{/* Features Showcase */}
+<section className="space-y-8" aria-labelledby="features-title">
+  <div className="text-center">
+    <h2 
+      id="features-title"
+      className="text-3xl font-heading font-bold mb-4"
+      tabIndex={0}
+    >
+      {language === 'ar' ? 'ميزاتنا المتطورة' : 'Our Advanced Features'}
+    </h2>
+    <p 
+      className="font-body text-gray-600 dark:text-gray-300 max-w-2xl mx-auto readable-text"
+      role="text"
+      aria-describedby="features-title"
+    >
+      {language === 'ar'
+        ? 'اكتشف كيف يمكن لوصلة أن تحسن من جودة حياتك اليومية'
+        : 'Discover how Waslah can improve your daily quality of life'}
+    </p>
+  </div>
 
-        <div 
-          className={`grid gap-6 ${
-            disabilityType === 'cognitive' 
-              ? 'grid-cols-1 md:grid-cols-2' 
-              : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
-          }`}
-          role="list"
-          aria-label={language === 'ar' ? 'قائمة الميزات المتاحة' : 'List of available features'}
+  <div 
+    className={`grid gap-6 ${
+      disabilityType === 'cognitive' 
+        ? 'grid-cols-1 md:grid-cols-2' 
+        : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+    }`}
+    role="list"
+    aria-label={language === 'ar' ? 'قائمة الميزات المتاحة' : 'List of available features'}
+  >
+    {features.map((feature, index) => {
+      const Icon = feature.icon;
+      return (
+        <Card 
+          key={index} 
+          className={`accessibility-card accessibility-transition hover:shadow-lg border-2 interactive-content ${
+            currentFeature === index 
+              ? 'border-[var(--color-pastel-purple)] shadow-lg scale-105' 
+              : 'border-[var(--color-pastel-purple)]/50 dark:border-[var(--color-dark-purple)]/50'
+          } ${disabilityType === 'cognitive' ? 'simplified-card' : ''}`}
+          style={{
+            minHeight: disabilityType === 'motor' ? '200px' : undefined,
+            padding: accessibilitySettings.showLargerButtons ? '24px' : undefined
+          }}
+          role="listitem"
+          tabIndex={0}
+          aria-label={`${feature.title}: ${feature.description}`}
         >
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
-            return (
-              <Card 
-                key={index} 
-                className={`accessibility-card accessibility-transition hover:shadow-lg border-2 interactive-content ${
-                  currentFeature === index 
-                    ? 'border-[var(--color-pastel-purple)] shadow-lg scale-105' 
-                    : 'border-[var(--color-pastel-purple)]/50 dark:border-[var(--color-dark-purple)]/50'
-                } ${disabilityType === 'cognitive' ? 'simplified-card' : ''}`}
-                style={{
-                  minHeight: disabilityType === 'motor' ? '200px' : undefined,
-                  padding: accessibilitySettings.showLargerButtons ? '24px' : undefined
-                }}
-                role="listitem"
-                tabIndex={0}
-                aria-label={`${feature.title}: ${feature.description}`}
-              >
-                <CardHeader>
-                  <div 
-                    className={`w-12 h-12 rounded-lg bg-gradient-to-r ${feature.color} flex items-center justify-center mb-4 feature-icon`}
-                    style={{
-                      width: disabilityType === 'motor' ? '60px' : '48px',
-                      height: disabilityType === 'motor' ? '60px' : '48px'
-                    }}
-                    aria-hidden="true"
-                    role="img"
-                    aria-label={feature.title}
-                  >
-                    <Icon 
-                      className="text-white icon-decorative" 
-                      size={disabilityType === 'motor' ? 32 : 24}
-                      aria-hidden="true"
-                      focusable="false"
-                    />
-                  </div>
-                  <CardTitle 
-                    className="text-lg font-heading"
-                    style={{
-                      fontSize: disabilityType === 'visual' || disabilityType === 'cognitive' ? '1.3em' : undefined
-                    }}
-                    role="heading"
-                    aria-level="3"
-                  >
-                    {feature.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p 
-                    className="text-[var(--color-dark-purple)] dark:text-[var(--color-pastel-purple)] leading-relaxed font-body readable-text"
-                    style={{
-                      fontSize: disabilityType === 'visual' || disabilityType === 'cognitive' ? '1.1em' : undefined,
-                      lineHeight: disabilityType === 'cognitive' ? '1.8' : '1.6'
-                    }}
-                    role="text"
-                  >
-                    {feature.description}
-                  </p>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-      </section>
+          <CardHeader>
+            <div 
+              className={`w-12 h-12 rounded-lg bg-gradient-to-r ${feature.color} flex items-center justify-center mb-4 feature-icon`}
+              style={{
+                width: disabilityType === 'motor' ? '60px' : '48px',
+                height: disabilityType === 'motor' ? '60px' : '48px'
+              }}
+              aria-hidden="true"
+              role="img"
+              aria-label={feature.title}
+            >
+              <Icon 
+                className="text-white icon-decorative" 
+                size={disabilityType === 'motor' ? 32 : 24}
+                aria-hidden="true"
+                focusable="false"
+              />
+            </div>
+            <CardTitle 
+              className="text-lg font-heading"
+              style={{
+                fontSize: disabilityType === 'visual' || disabilityType === 'cognitive' ? '1.3em' : undefined
+              }}
+              role="heading"
+              aria-level="3"
+            >
+              {feature.title}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p 
+              className="text-[var(--color-dark-purple)] dark:text-[var(--color-pastel-purple)] leading-relaxed font-body readable-text"
+              style={{
+                fontSize: disabilityType === 'visual' || disabilityType === 'cognitive' ? '1.1em' : undefined,
+                lineHeight: disabilityType === 'cognitive' ? '1.8' : '1.6'
+              }}
+              role="text"
+            >
+              {feature.description}
+            </p>
+          </CardContent>
+        </Card>
+      );
+    })}
+  </div>
+</section>
 
-      {/* Quick Access */}
+      {/* Quick Access 
       <section aria-labelledby="quick-access-title">
         <Card className="bg-gradient-to-r from-[var(--color-dark-purple)] to-[var(--color-vibrant-orange)] text-white">
           <CardContent className="p-8">
@@ -412,7 +420,7 @@ export function WelcomePage({}: WelcomePageProps = {}) {
           </CardContent>
         </Card>
       </section>
-
+*/}
       {/* Testimonials */}
       <section className="space-y-8" aria-labelledby="testimonials-title">
         <div className="text-center">
@@ -446,7 +454,10 @@ export function WelcomePage({}: WelcomePageProps = {}) {
           {testimonials.map((testimonial, index) => (
             <Card 
               key={index} 
-              className="border-2 border-[var(--color-calm-green)]/30 dark:border-[var(--color-calm-green)] accessibility-card"
+            className="border-2 border-lightPurple/30 accessibility-card
+                      bg-gradient-to-br from-lightPurple/5 via-lighterPurple/10 to-lightestPurple/5
+                      dark:from-lightPurple/20 dark:via-lighterPurple/15 dark:to-lightestPurple/10"
+
               style={{
                 padding: disabilityType === 'motor' ? '24px' : undefined
               }}
@@ -522,11 +533,13 @@ export function WelcomePage({}: WelcomePageProps = {}) {
                 size={disabilityType === 'visual' || disabilityType === 'motor' ? 32 : 24}
                 aria-hidden="true"
               />
-              <div>
+              <div className="w-full text-center">
                 <h3 
                   id="accessibility-notice-title"
                   className="font-heading font-semibold text-[var(--color-calm-green)] mb-2"
                   style={{
+                    color: "var(--color-calm-green)",
+                    filter: "brightness(0.7)" ,
                     fontSize: disabilityType === 'visual' || disabilityType === 'cognitive' ? '1.3em' : '1.125rem'
                   }}
                   role="heading"
@@ -535,8 +548,10 @@ export function WelcomePage({}: WelcomePageProps = {}) {
                   {language === 'ar' ? 'ملتزمون بالوصولية الرقمية' : 'Committed to Digital Accessibility'}
                 </h3>
                 <p 
-                  className="font-body text-[var(--color-calm-green)] leading-relaxed readable-text"
+                  className="w-full text-center whitespace-nowrap font-body text-[var(--color-calm-green)] leading-relaxed readable-text"
                   style={{
+                    color: "var(--color-calm-green)",
+                    filter: "brightness(0.7)" ,
                     fontSize: disabilityType === 'visual' || disabilityType === 'cognitive' ? '1.1em' : undefined,
                     lineHeight: disabilityType === 'cognitive' ? '1.8' : '1.6'
                   }}
