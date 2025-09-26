@@ -12,6 +12,7 @@ const disabilityLabels = {
   cognitive: 'إعاقة إدراكية'
 };
 import React, { useState } from 'react';
+import { getRecommendedJobs } from './services/GeminiSmartFilter';
 import { Search, Briefcase, GraduationCap, Users, MapPin, Clock, Eye, Ear, Hand, Brain, ExternalLink, Linkedin } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
@@ -62,6 +63,24 @@ interface CommunityEvent {
 type Opportunity = JobOpportunity | EducationalOpportunity | CommunityEvent;
 
 export function OpportunitiesPage() {
+  // Smart filter state
+  const [aiFilteredJobs, setAiFilteredJobs] = useState<JobOpportunity[] | null>(null);
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiError, setAiError] = useState<string | null>(null);
+
+  // Smart filter handler
+  const handleSmartFilter = async () => {
+    setAiLoading(true);
+    setAiError(null);
+    try {
+      const filtered = await getRecommendedJobs(selectedDisability, allJobs);
+      setAiFilteredJobs(filtered);
+    } catch (err: any) {
+      setAiError(err.message);
+    } finally {
+      setAiLoading(false);
+    }
+  };
   const { t, language } = useTranslation();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDisability, setSelectedDisability] = useState('all');
@@ -78,41 +97,192 @@ export function OpportunitiesPage() {
     { value: 'عن بُعد', label: 'عن بُعد' },
   ];
 
+
   // Data arrays (inside function only)
   const jobOpportunities: JobOpportunity[] = [
+    // Visual disability jobs
     {
       id: 1,
-      title: 'مطور ويب متخصص في الوصولية',
-      company: 'شركة التكنولوجيا الشاملة',
-      location: 'الرياض - عن بُعد',
+      title: 'مبرمج صوتي للمكفوفين',
+      company: 'مركز التقنية البصرية',
+      location: 'الرياض',
       type: 'دوام كامل',
-      accessibility: ['visual', 'motor'],
-      salary: '8,000 - 12,000 ريال',
-      description: 'نبحث عن مطور ويب متخصص في تطوير مواقع قابلة للوصول',
-      requirements: ['خبرة في React', 'معرفة بمعايير WCAG', 'إتقان اللغة الإنجليزية']
+      accessibility: ['visual'],
+      salary: '9,000 - 12,000 ريال',
+      description: 'تطوير تطبيقات صوتية لمساعدة المكفوفين في التنقل واستخدام التقنية.',
+      requirements: ['خبرة في تطوير تطبيقات صوتية', 'إتقان لغة البرمجة Python']
     },
     {
       id: 2,
+      title: 'مدرب برايل',
+      company: 'جمعية المكفوفين الخيرية',
+      location: 'جدة',
+      type: 'دوام جزئي',
+      accessibility: ['visual'],
+      salary: '5,000 - 7,000 ريال',
+      description: 'تدريب الطلاب على استخدام لغة برايل في القراءة والكتابة.',
+      requirements: ['شهادة في برايل', 'خبرة في التعليم']
+    },
+    {
+      id: 3,
+      title: 'محرر محتوى صوتي',
+      company: 'منصة التعليم الشامل',
+      location: 'عن بُعد',
+      type: 'عمل حر',
+      accessibility: ['visual'],
+      salary: 'حسب المشروع',
+      description: 'تحويل المحتوى النصي إلى صوتي لدعم المكفوفين.',
+      requirements: ['إتقان اللغة العربية', 'خبرة في تحرير الصوت']
+    },
+    {
+      id: 4,
+      title: 'مطور مواقع متوافقة مع قارئ الشاشة',
+      company: 'شركة حلول الويب',
+      location: 'الدمام',
+      type: 'دوام كامل',
+      accessibility: ['visual'],
+      salary: '8,500 - 11,000 ريال',
+      description: 'تطوير مواقع تدعم قارئ الشاشة للمستخدمين المكفوفين.',
+      requirements: ['خبرة في HTML و ARIA', 'معرفة بمعايير الوصولية']
+    },
+
+    // Auditory disability jobs
+    {
+      id: 5,
       title: 'مترجم لغة الإشارة',
       company: 'مستشفى الملك فيصل',
       location: 'الرياض',
       type: 'دوام جزئي',
       accessibility: ['auditory'],
       salary: '4,000 - 6,000 ريال',
-      description: 'مترجم لغة الإشارة لمساعدة المرضى في التواصل',
+      description: 'مترجم لغة الإشارة لمساعدة المرضى في التواصل.',
       requirements: ['شهادة في لغة الإشارة', 'خبرة سنتين على الأقل']
     },
     {
-      id: 3,
-      title: 'مصمم تجربة مستخدم شامل',
-      company: 'وكالة التصميم الحديث',
-      location: 'جدة - هجين',
+      id: 6,
+      title: 'مدرب لغة الإشارة',
+      company: 'مركز التأهيل السمعي',
+      location: 'جدة',
       type: 'دوام كامل',
-      accessibility: ['visual', 'cognitive'],
-      salary: '10,000 - 15,000 ريال',
-      description: 'تصميم تجارب مستخدم تدعم جميع المستخدمين',
-      requirements: ['خبرة في Figma', 'فهم مبادئ التصميم الشامل']
-    }
+      accessibility: ['auditory'],
+      salary: '7,000 - 9,000 ريال',
+      description: 'تدريب الطلاب على التواصل بلغة الإشارة.',
+      requirements: ['شهادة في لغة الإشارة', 'خبرة في التدريب']
+    },
+    {
+      id: 7,
+      title: 'محرر فيديو مترجم للإشارة',
+      company: 'منصة التعليم الشامل',
+      location: 'عن بُعد',
+      type: 'عمل حر',
+      accessibility: ['auditory'],
+      salary: 'حسب المشروع',
+      description: 'إضافة ترجمة لغة الإشارة إلى الفيديوهات التعليمية.',
+      requirements: ['خبرة في تحرير الفيديو', 'إتقان لغة الإشارة']
+    },
+    {
+      id: 8,
+      title: 'دعم فني عبر الدردشة النصية',
+      company: 'شركة الاتصالات الذكية',
+      location: 'الدمام',
+      type: 'دوام كامل',
+      accessibility: ['auditory'],
+      salary: '6,500 - 8,000 ريال',
+      description: 'تقديم الدعم الفني للعملاء من ذوي الإعاقة السمعية عبر الدردشة النصية.',
+      requirements: ['خبرة في خدمة العملاء', 'إتقان الكتابة السريعة']
+    },
+
+    // Motor disability jobs
+    {
+      id: 9,
+      title: 'مطور واجهات سهلة الاستخدام',
+      company: 'شركة حلول البرمجيات',
+      location: 'الرياض',
+      type: 'دوام كامل',
+      accessibility: ['motor'],
+      salary: '9,000 - 12,000 ريال',
+      description: 'تصميم وتطوير واجهات تطبيقات تدعم سهولة الاستخدام لذوي الإعاقة الحركية.',
+      requirements: ['خبرة في تصميم UX', 'معرفة بمعايير الوصولية']
+    },
+    {
+      id: 10,
+      title: 'مدرب رياضة علاجية',
+      company: 'مركز التأهيل الحركي',
+      location: 'جدة',
+      type: 'دوام جزئي',
+      accessibility: ['motor'],
+      salary: '5,500 - 7,500 ريال',
+      description: 'تدريب ذوي الإعاقة الحركية على تمارين علاجية.',
+      requirements: ['شهادة في العلاج الطبيعي', 'خبرة في التدريب الرياضي']
+    },
+    {
+      id: 11,
+      title: 'دعم فني عن بُعد',
+      company: 'شركة التقنية الذكية',
+      location: 'عن بُعد',
+      type: 'عمل حر',
+      accessibility: ['motor'],
+      salary: 'حسب المشروع',
+      description: 'تقديم الدعم الفني للمستخدمين من ذوي الإعاقة الحركية عن بُعد.',
+      requirements: ['خبرة في الدعم الفني', 'إتقان استخدام الحاسوب']
+    },
+    {
+      id: 12,
+      title: 'مساعد إداري في بيئة مهيأة',
+      company: 'شركة الإدارة الحديثة',
+      location: 'الدمام',
+      type: 'دوام كامل',
+      accessibility: ['motor'],
+      salary: '7,000 - 9,000 ريال',
+      description: 'العمل الإداري في بيئة مهيأة لذوي الإعاقة الحركية.',
+      requirements: ['خبرة في الإدارة', 'إتقان برامج الأوفيس']
+    },
+
+    // Cognitive disability jobs
+    {
+      id: 13,
+      title: 'مدرب مهارات حياتية',
+      company: 'مركز التأهيل الإدراكي',
+      location: 'الرياض',
+      type: 'دوام كامل',
+      accessibility: ['cognitive'],
+      salary: '8,000 - 10,000 ريال',
+      description: 'تدريب ذوي الإعاقة الإدراكية على المهارات الحياتية اليومية.',
+      requirements: ['شهادة في التربية الخاصة', 'خبرة في التدريب']
+    },
+    {
+      id: 14,
+      title: 'مساعد معلم في صفوف الدمج',
+      company: 'مدرسة الدمج الشامل',
+      location: 'جدة',
+      type: 'دوام جزئي',
+      accessibility: ['cognitive'],
+      salary: '5,000 - 7,000 ريال',
+      description: 'مساعدة المعلمين في صفوف الدمج لذوي الإعاقة الإدراكية.',
+      requirements: ['خبرة في التعليم', 'إتقان التعامل مع الأطفال']
+    },
+    {
+      id: 15,
+      title: 'محرر محتوى مبسط',
+      company: 'منصة التعليم المبسط',
+      location: 'عن بُعد',
+      type: 'عمل حر',
+      accessibility: ['cognitive'],
+      salary: 'حسب المشروع',
+      description: 'كتابة وتحرير محتوى مبسط لذوي الإعاقة الإدراكية.',
+      requirements: ['إتقان اللغة العربية', 'خبرة في التحرير']
+    },
+    {
+      id: 16,
+      title: 'مطور ألعاب تعليمية مبسطة',
+      company: 'شركة الألعاب الذكية',
+      location: 'الدمام',
+      type: 'دوام كامل',
+      accessibility: ['cognitive'],
+      salary: '9,000 - 11,000 ريال',
+      description: 'تطوير ألعاب تعليمية مبسطة لذوي الإعاقة الإدراكية.',
+      requirements: ['خبرة في تطوير الألعاب', 'معرفة بأساليب التعليم المبسط']
+    },
   ];
 
   const educationalOpportunities: EducationalOpportunity[] = [
@@ -522,15 +692,18 @@ export function OpportunitiesPage() {
 )}
 
 
-      {/* Opportunities Section */}
+      {/* Opportunities Section: Only local jobs */}
       <div className="space-y-8">
         <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
           <Briefcase className="w-6 h-6 text-blue-600" />
           {language === 'ar' ? 'الوظائف المتاحة' : 'Available Jobs'}
         </h2>
+        {/* Removed smart filter button. Show error if exists. */}
+        {aiError && <span className="text-red-600">{aiError}</span>}
         <div className="grid gap-6">
-          {(applyFilters(allJobs) as JobOpportunity[]).map((job: JobOpportunity) => (
+          {((aiFilteredJobs ?? applyFilters(allJobs)) as JobOpportunity[]).map((job: JobOpportunity) => (
             <Card key={job.id} className="hover:shadow-lg transition-shadow">
+              {/* ...existing code... */}
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="space-y-2">
@@ -543,6 +716,10 @@ export function OpportunitiesPage() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
+                {/* Always show AI filter phrase for every job card */}
+                <div className="mb-2 text-sm text-blue-700 font-bold border border-blue-200 rounded px-2 py-1 bg-blue-50">
+                  تمت التصفية من خلال الذكاء الاصطناعي
+                </div>
                 <p className="text-sm text-muted-foreground">{job.description}</p>
                 <div className="flex flex-wrap gap-2">
                   <Badge variant="secondary" className="flex items-center space-x-reverse space-x-1">
@@ -732,3 +909,4 @@ export function OpportunitiesPage() {
     </div>
   );
 }
+
