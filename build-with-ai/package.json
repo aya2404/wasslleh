@@ -3,6 +3,7 @@
       "name": "Accessible Community Website",
       "version": "0.1.0",
       "private": true,
+    "homepage": "https://aya2404.github.io/wasslleh",
       "dependencies": {
           "@jsr/supabase__supabase-js": "^2.49.8",
           "@radix-ui/react-accordion": "^1.2.3",
